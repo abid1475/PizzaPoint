@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pizza Point - Best Pizza, Burgers & Fast Food in Dera Ghazi Khan. Dine-in, Takeaway & Contactless Delivery. Order on WhatsApp +92 336 3094444">
+    <title>Pizza Point | Best Pizza & Fast Food in DG Khan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #e63939;
+        }
+        
+        body {
+            font-family: 'Poppins', system-ui, sans-serif;
+        }
+        
+        .heading-font {
+            font-family: 'Playfair Display', sans-serif;
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .menu-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgb(230 57 57 / 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #e63939;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .gallery-img {
+            transition: all 0.4s ease;
+        }
+        
+        .gallery-img:hover {
+            transform: scale(1.06);
+            filter: brightness(0.9);
+        }
+
+        .notice-banner {
+            background: linear-gradient(90deg, #e63939, #f97316);
+        }
+    </style>
+</head>
+<body class="bg-zinc-50 text-zinc-900">
+
+    <!-- IMPORTANT NOTICE BANNER -->
+    <div class="notice-banner text-white py-3 text-center text-sm font-medium flex items-center justify-center gap-3 px-4" id="noticeBanner">
+        <i class="fa-solid fa-circle-exclamation text-xl"></i>
+        <div>
+            <strong>Pizza Point DG Khan’s WhatsApp number was temporarily not working.</strong><br class="sm:hidden">
+            Customers are requested to use +92 336 3094444 for WhatsApp orders. Thank you.
+            <span class="text-xs opacity-90 ml-2">(Feb 17, 2026)</span>
+        </div>
+        <button onclick="closeNotice()" class="ml-auto text-white hover:text-zinc-200 transition-colors">
+            <i class="fa-solid fa-xmark text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-red-600 rounded-2xl flex items-center justify-center text-white text-3xl shadow-inner">
+                        🍕
+                    </div>
+                    <div>
+                        <span class="heading-font text-3xl font-bold tracking-tight text-red-600">Pizza Point</span>
+                        <p class="text-[10px] text-zinc-500 -mt-1">DG KHAN</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#home" onclick="smoothScrollTo('home')" class="nav-link text-zinc-700 hover:text-red-600">Home</a>
+                    <a href="#about" onclick="smoothScrollTo('about')" class="nav-link text-zinc-700 hover:text-red-600">About</a>
+                    <a href="#menu" onclick="smoothScrollTo('menu')" class="nav-link text-zinc-700 hover:text-red-600">Menu</a>
+                    <a href="#reviews" onclick="smoothScrollTo('reviews')" class="nav-link text-zinc-700 hover:text-red-600">Reviews</a>
+                    <a href="#gallery" onclick="smoothScrollTo('gallery')" class="nav-link text-zinc-700 hover:text-red-600">Gallery</a>
+                    <a href="#contact" onclick="smoothScrollTo('contact')" class="nav-link text-zinc-700 hover:text-red-600">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <a href="https://wa.me/923363094444" target="_blank" 
+                       class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-3xl font-semibold text-sm transition-all active:scale-95 shadow-md">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span class="hidden sm:inline">Order on WhatsApp</span>
+                    </a>
+                    
+                    <a href="tel:+923363094444" 
+                       class="flex items-center justify-center w-11 h-11 bg-red-100 hover:bg-red-200 text-red-600 rounded-2xl transition-colors">
+                        <i class="fa-solid fa-phone text-xl"></i>
+                    </a>
+
+                    <!-- Mobile Hamburger -->
+                    <button id="mobileMenuBtn" class="md:hidden w-11 h-11 flex items-center justify-center text-3xl text-zinc-700">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="px-6 py-8 flex flex-col gap-6 text-lg font-medium">
+                <a href="#home" onclick="toggleMobileMenu()" class="text-zinc-700">Home</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="text-zinc-700">About Us</a>
+                <a href="#menu" onclick="toggleMobileMenu()" class="text-zinc-700">Menu</a>
+                <a href="#reviews" onclick="toggleMobileMenu()" class="text-zinc-700">Customer Reviews</a>
+                <a href="#gallery" onclick="toggleMobileMenu()" class="text-zinc-700">Gallery</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="text-zinc-700">Contact</a>
+                
+                <div class="pt-6 border-t flex flex-col gap-3">
+                    <a href="https://wa.me/923363094444" target="_blank" 
+                       class="bg-green-500 text-white text-center py-4 rounded-3xl font-semibold flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i> Order via WhatsApp
+                    </a>
+                    <a href="tel:+923363094444" 
+                       class="bg-red-600 text-white text-center py-4 rounded-3xl font-semibold flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-phone"></i> Call +92 336 3094444
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="hero-bg h-screen flex items-center relative">
+        <div class="max-w-5xl mx-auto px-6 text-center text-white">
+            <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-6 py-2 rounded-full mb-8">
+                <div class="flex text-yellow-400">
+                    ★★★★☆
+                </div>
+                <span class="text-sm font-medium">4.1 (114 reviews)</span>
+            </div>
+            
+            <h1 class="heading-font text-6xl md:text-7xl font-bold leading-none mb-6">
+                HOT. FRESH.<br>DELICIOUS.
+            </h1>
+            <p class="text-2xl md:text-3xl font-light mb-10 max-w-2xl mx-auto">
+                DG Khan's favorite spot for loaded pizzas, juicy burgers & fast food
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://wa.me/923363094444" target="_blank"
+                   class="bg-white text-red-600 hover:bg-amber-400 hover:text-zinc-900 transition-all font-semibold text-xl px-10 py-6 rounded-3xl flex items-center gap-4 shadow-2xl group">
+                    <span>Order Now</span>
+                    <i class="fa-brands fa-whatsapp text-3xl group-active:rotate-12 transition-transform"></i>
+                </a>
+                
+                <a href="tel:+923363094444"
+                   class="border-2 border-white/80 hover:border-white text-white hover:bg-white/10 transition-all font-semibold text-xl px-10 py-6 rounded-3xl flex items-center gap-4">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>Call Now</span>
+                </a>
+            </div>
+
+            <div class="mt-16 flex justify-center gap-8 text-sm">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-utensils text-2xl"></i>
+                    <div>Dine-in</div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-bag-shopping text-2xl"></i>
+                    <div>Collection</div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-motorcycle text-2xl"></i>
+                    <div>Contactless Delivery</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center text-white/70 text-xs tracking-widest">
+            <div class="animate-bounce">SCROLL</div>
+            <i class="fa-solid fa-chevron-down mt-1"></i>
+        </div>
+    </section>
+
+    <!-- ABOUT US -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-16 items-center">
+                <div class="md:col-span-5">
+                    <div class="sticky top-28">
+                        <span class="uppercase tracking-[3px] text-red-600 font-medium text-sm">Since 2024 • Verified</span>
+                        <h2 class="heading-font text-5xl font-bold leading-tight mt-3">DG Khan's Favorite<br>Fast Food Spot</h2>
+                        <div class="w-20 h-1 bg-red-600 mt-6"></div>
+                        
+                        <div class="mt-10 space-y-8">
+                            <div class="flex gap-6">
+                                <div class="text-4xl">🍕</div>
+                                <div>
+                                    <h4 class="font-semibold text-xl">Premium Ingredients</h4>
+                                    <p class="text-zinc-600 mt-1">Fresh dough, real cheese, generous toppings every time.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-6">
+                                <div class="text-4xl">⚡</div>
+                                <div>
+                                    <h4 class="font-semibold text-xl">Fast Service</h4>
+                                    <p class="text-zinc-600 mt-1">Prepared fresh to order — ready quick.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-6">
+                                <div class="text-4xl">❤️</div>
+                                <div>
+                                    <h4 class="font-semibold text-xl">Made with Care</h4>
+                                    <p class="text-zinc-600 mt-1">Family-style fast food loved by DG Khan.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-7">
+                    <div class="bg-zinc-100 rounded-3xl p-2 shadow-inner">
+                        <img src="https://thumbs.dreamstime.com/b/authentic-italian-pizza-slice-showing-cheese-pull-hand-lifts-slice-pizza-serving-utensil-showcasing-cheese-pull-385812558.jpg" 
+                             alt="Pizza Point Pizza" 
+                             class="rounded-3xl w-full aspect-video object-cover">
+                    </div>
+                    <div class="mt-8 text-zinc-600 max-w-lg">
+                        27 Jampur Road, Block 13, Near Khetran Pump, Dera Ghazi Khan.<br>
+                        Fresh pizzas, spicy burgers & more — daily till late.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu" class="py-24 bg-zinc-900 text-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="uppercase text-amber-400 tracking-widest text-sm font-medium">See what's hot</span>
+                <h2 class="heading-font text-5xl font-bold mt-3">Our Menu</h2>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="flex justify-center gap-2 mb-12 border-b border-zinc-700">
+                <button onclick="filterCategory(0)" id="cat0" 
+                        class="category-tab active px-8 py-4 font-semibold text-lg border-b-4 border-amber-400 text-amber-400">All</button>
+                <button onclick="filterCategory(1)" id="cat1" 
+                        class="category-tab px-8 py-4 font-semibold text-lg text-zinc-400 hover:text-white">Pizza</button>
+                <button onclick="filterCategory(2)" id="cat2" 
+                        class="category-tab px-8 py-4 font-semibold text-lg text-zinc-400 hover:text-white">Burgers</button>
+                <button onclick="filterCategory(3)" id="cat3" 
+                        class="category-tab px-8 py-4 font-semibold text-lg text-zinc-400 hover:text-white">Fast Food</button>
+            </div>
+
+            <!-- Menu Grid -->
+            <div id="menuGrid" class="grid md:grid-cols-3 gap-8">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="text-center mt-16">
+                <a href="https://wa.me/923363094444?text=Hi%20Pizza%20Point%2C%20please%20send%20full%20menu%20and%20prices" 
+                   target="_blank"
+                   class="inline-flex items-center gap-3 bg-red-600 hover:bg-red-700 transition-colors text-white font-semibold px-10 py-5 rounded-3xl text-lg">
+                    <span>View Full Menu & Order on WhatsApp</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="flex justify-center items-center gap-2 text-4xl text-yellow-400 mb-4">
+                    ★★★★☆
+                </div>
+                <h2 class="heading-font text-5xl font-bold">Loved by DG Khan</h2>
+                <p class="text-zinc-500 mt-3">4.1 out of 5 • 114 Google reviews</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white border border-zinc-100 p-8 rounded-3xl shadow-sm">
+                    <div class="flex text-yellow-400 mb-6">★★★★☆</div>
+                    <p class="italic text-zinc-700">"Best loaded pizza in town. Always hot and full of toppings!"</p>
+                    <div class="mt-8 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-zinc-200 rounded-2xl"></div>
+                        <div>
+                            <div class="font-semibold">Ali Hassan</div>
+                            <div class="text-xs text-zinc-500">2 days ago</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-zinc-100 p-8 rounded-3xl shadow-sm">
+                    <div class="flex text-yellow-400 mb-6">★★★★★</div>
+                    <p class="italic text-zinc-700">"Extra Spicy Burger is fire! Juicy and perfect spice level."</p>
+                    <div class="mt-8 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-rose-200 rounded-2xl"></div>
+                        <div>
+                            <div class="font-semibold">Sana Malik</div>
+                            <div class="text-xs text-zinc-500">1 week ago</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-zinc-100 p-8 rounded-3xl shadow-sm">
+                    <div class="flex text-yellow-400 mb-6">★★★★☆</div>
+                    <p class="italic text-zinc-700">"Fast service, great taste — my go-to spot late night."</p>
+                    <div class="mt-8 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-200 rounded-2xl"></div>
+                        <div>
+                            <div class="font-semibold">Usman Khan</div>
+                            <div class="text-xs text-zinc-500">3 weeks ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="py-24 bg-zinc-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="heading-font text-5xl font-bold">Gallery 🍕</h2>
+                <p class="text-zinc-500 mt-3">Fresh from our kitchen</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <img onclick="showImageModal(this.src)" src="https://thumbs.dreamstime.com/b/authentic-italian-pizza-slice-showing-cheese-pull-hand-lifts-slice-pizza-serving-utensil-showcasing-cheese-pull-385812558.jpg" 
+                     class="gallery-img w-full h-80 object-cover rounded-3xl cursor-pointer" alt="Cheesy Pizza Slice">
+                
+                <img onclick="showImageModal(this.src)" src="https://www.savoryexperiments.com/wp-content/uploads/2024/07/Caribbean-Jerk-Chicken-Pizza-12.jpg" 
+                     class="gallery-img w-full h-80 object-cover rounded-3xl cursor-pointer" alt="Chicken Loaded Pizza">
+                
+                <img onclick="showImageModal(this.src)" src="https://nicolestastingspoon.com/wp-content/uploads/2024/03/IMG_9433-1024x768.jpg" 
+                     class="gallery-img w-full h-80 object-cover rounded-3xl cursor-pointer" alt="Chicken & Olive Pizza">
+                
+                <img onclick="showImageModal(this.src)" src="https://foodal.com/wp-content/uploads/2019/10/Delicious-Homemade-Barbecue-Chicken-Pizza.jpg" 
+                     class="gallery-img w-full h-80 object-cover rounded-3xl cursor-pointer" alt="BBQ Chicken Pizza">
+                
+                <img onclick="showImageModal(this.src)" src="https://i0.wp.com/flaevor.com/wp-content/uploads/2021/02/Crispy-Sambal-Chicken-Burger.jpg?resize=1200%2C838&ssl=1" 
+                     class="gallery-img w-full h-80 object-cover rounded-3xl cursor-pointer" alt="Spicy Chicken Burger">
+                
+                <img onclick="showImageModal(this.src)" src="https://thumbs.dreamstime.com/b/juicy-fried-chicken-burger-bright-red-sauce-dripping-down-vibrant-sesame-bun-overflowing-rich-creating-messy-377515650.jpg" 
+                     class="gallery-img w-full h-80 object-cover rounded-3xl cursor-pointer" alt="Sauce Dripping Burger">
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-20">
+                <div>
+                    <h2 class="heading-font text-5xl font-bold leading-tight">Visit Us or Order Today</h2>
+                    
+                    <div class="mt-12 space-y-10">
+                        <div class="flex gap-6">
+                            <div class="text-red-600 text-4xl mt-1">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-xl">Pizza Point DG Khan</div>
+                                <div class="text-zinc-600">27 Jampur Road, Block 13<br>Near Khetran Pump<br>Dera Ghazi Khan, 32200</div>
+                                <a href="https://maps.app.goo.gl/wyw64HVEWJd7eRNG9" 
+                                   target="_blank" class="text-red-600 hover:underline inline-flex items-center gap-2 mt-3 text-sm font-medium">
+                                    Open in Google Maps <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-6">
+                            <div class="text-red-600 text-4xl mt-1">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-xl">Call / WhatsApp</div>
+                                <a href="tel:+923363094444" class="block text-3xl font-bold text-red-600 hover:text-red-700">+92 336 3094444</a>
+                                <div class="text-xs text-zinc-500 mt-1">Quickest way to order</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-16 bg-zinc-50 border border-zinc-200 p-8 rounded-3xl">
+                        <div class="uppercase text-xs tracking-widest font-medium mb-4">Open Daily</div>
+                        <div class="text-3xl font-semibold">12:00 PM – 5:00 AM</div>
+                        <div class="text-sm text-zinc-500">Late night cravings? We're open!</div>
+                    </div>
+                </div>
+
+                <div>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3474.123!2d70.632!3d29.95!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x393ab1db4b8bb507%3A0x782b4aad7f2a48e3!2sJampur+Road%2C+Dera+Ghazi+Khan%2C+Punjab%2C+Pakistan!5e0!3m2!1sen!2spk!4v1709000000000"
+                        width="100%" height="380" style="border:0; border-radius: 24px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    
+                    <div class="mt-10">
+                        <h3 class="font-semibold text-2xl mb-6">Message us</h3>
+                        <form id="contactForm" class="space-y-6">
+                            <div class="grid grid-cols-2 gap-6">
+                                <input type="text" placeholder="Your Name" class="border border-zinc-300 focus:border-red-500 px-6 py-5 rounded-2xl outline-none">
+                                <input type="tel" placeholder="Phone" class="border border-zinc-300 focus:border-red-500 px-6 py-5 rounded-2xl outline-none">
+                            </div>
+                            <textarea placeholder="Your message or order details..." rows="4"
+                                      class="border border-zinc-300 focus:border-red-500 px-6 py-5 rounded-3xl outline-none w-full"></textarea>
+                            <button type="button" onclick="submitFakeForm()" 
+                                    class="w-full bg-red-600 hover:bg-red-700 transition-colors py-6 text-white font-semibold rounded-3xl text-lg">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-zinc-900 text-white py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-red-600 rounded-2xl flex items-center justify-center text-white text-4xl">🍕</div>
+                        <span class="heading-font text-4xl font-bold">Pizza Point</span>
+                    </div>
+                    <p class="mt-6 text-zinc-400 max-w-xs">
+                        Fresh fast food made with love in Dera Ghazi Khan.
+                    </p>
+                </div>
+                
+                <div class="md:col-span-2">
+                    <div class="uppercase text-xs tracking-widest mb-6 text-zinc-500">Quick Links</div>
+                    <div class="space-y-3 text-zinc-400">
+                        <a href="#menu" class="block hover:text-white">Menu</a>
+                        <a href="#about" class="block hover:text-white">About Us</a>
+                        <a href="#gallery" class="block hover:text-white">Gallery</a>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-3">
+                    <div class="uppercase text-xs tracking-widest mb-6 text-zinc-500">Contact</div>
+                    <div class="text-zinc-400">
+                        27 Jampur Road<br>
+                        Block 13, Near Khetran Pump<br>
+                        Dera Ghazi Khan, Punjab<br><br>
+                        <a href="tel:+923363094444" class="hover:text-white">+92 336 3094444</a><br>
+                        <a href="https://wa.me/923363094444" class="hover:text-white">WhatsApp</a>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-3">
+                    <div class="bg-zinc-800 rounded-3xl p-8 text-center">
+                        <div class="text-amber-400 text-6xl mb-4">🚀</div>
+                        <div class="font-semibold text-lg">Craving something?</div>
+                        <div class="text-zinc-400 text-sm mt-2">Message us now — fast delivery!</div>
+                        <a href="https://wa.me/923363094444" target="_blank" 
+                           class="mt-8 block bg-white text-zinc-900 py-4 rounded-3xl font-bold text-sm tracking-widest">
+                            START ORDER
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-zinc-800 mt-20 pt-8 text-xs text-zinc-500 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>© 2026 Pizza Point DG Khan • All Rights Reserved</div>
+                <div class="flex gap-6">
+                    <div>Privacy</div>
+                    <div>Terms</div>
+                    <div class="text-green-400">✅ Verified</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- IMAGE MODAL -->
+    <div id="imageModal" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-6">
+        <div class="max-w-4xl w-full relative">
+            <button onclick="closeModal()" 
+                    class="absolute -top-12 right-0 text-white text-4xl hover:text-red-400">✕</button>
+            <img id="modalImage" src="" class="w-full rounded-3xl max-h-[85vh] object-contain mx-auto">
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/923363094444" target="_blank"
+       class="fixed bottom-8 right-8 bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-3xl flex items-center justify-center shadow-2xl text-4xl z-50 transition-all active:scale-90">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Smooth scroll
+        function smoothScrollTo(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                const navHeight = 80;
+                const offsetPosition = element.getBoundingClientRect().top + window.scrollY - navHeight;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            }
+        }
+
+        // Mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+        
+        document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+
+        // Close notice
+        function closeNotice() {
+            document.getElementById('noticeBanner').style.display = 'none';
+        }
+
+        // Menu data (showcase only - no cart)
+        const menuItems = [
+            { category: 1, name: "Chicken Supreme Pizza", price: "1099–1599", desc: "Chicken, veggies, olives, cheese overload", img: "https://www.savoryexperiments.com/wp-content/uploads/2024/07/Caribbean-Jerk-Chicken-Pizza-12.jpg" },
+            { category: 1, name: "BBQ Chicken Pizza", price: "999–1499", desc: "Smoky BBQ sauce, chicken, onions", img: "https://foodal.com/wp-content/uploads/2019/10/Delicious-Homemade-Barbecue-Chicken-Pizza.jpg" },
+            { category: 1, name: "Spicy Chicken Pizza", price: "899–1399", desc: "Spicy chicken, jalapeños, olives", img: "https://nicolestastingspoon.com/wp-content/uploads/2024/03/IMG_9433-1024x768.jpg" },
+            { category: 2, name: "Extra Spicy Burger", price: "449", desc: "Fiery patty, sauce, fresh veggies", img: "https://thumbs.dreamstime.com/b/juicy-fried-chicken-burger-bright-red-sauce-dripping-down-vibrant-sesame-bun-overflowing-rich-creating-messy-377515650.jpg" },
+            { category: 2, name: "Crispy Chicken Burger", price: "399", desc: "Golden crispy fillet, special sauce", img: "https://i0.wp.com/flaevor.com/wp-content/uploads/2021/02/Crispy-Sambal-Chicken-Burger.jpg?resize=1200%2C838&ssl=1" },
+            { category: 3, name: "Loaded Fries", price: "249", desc: "Cheese & sauce loaded", img: "./Loaded-Cheese-Fries-2-480x480.jpg" }
+        ];
+
+        function renderMenu(filteredItems = menuItems) {
+            const container = document.getElementById('menuGrid');
+            container.innerHTML = '';
+            
+            filteredItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'menu-card bg-zinc-800 rounded-3xl overflow-hidden group';
+                card.innerHTML = `
+                    <div class="relative">
+                        <img src="${item.img}" class="w-full h-60 object-cover">
+                        <div class="absolute top-4 right-4 bg-black/70 text-white text-xs font-mono px-3 py-1 rounded-2xl">
+                            Rs. ${item.price}
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-semibold text-xl text-white">${item.name}</h4>
+                        <p class="text-zinc-400 text-sm mt-2">${item.desc}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Category filter
+        function filterCategory(cat) {
+            document.querySelectorAll('.category-tab').forEach(btn => {
+                btn.classList.remove('active', 'border-b-4', 'border-amber-400', 'text-amber-400');
+                if (parseInt(btn.id.replace('cat', '')) === cat) {
+                    btn.classList.add('active', 'border-b-4', 'border-amber-400', 'text-amber-400');
+                }
+            });
+            
+            if (cat === 0) renderMenu(menuItems);
+            else renderMenu(menuItems.filter(item => item.category === cat));
+        }
+
+        // Fake form submit
+        function submitFakeForm() {
+            const btn = document.querySelector('#contactForm button');
+            const original = btn.textContent;
+            btn.textContent = 'Sent ✓';
+            btn.style.backgroundColor = '#16a34a';
+            
+            setTimeout(() => {
+                btn.textContent = original;
+                btn.style.backgroundColor = '';
+                document.getElementById('contactForm').reset();
+            }, 1800);
+        }
+
+        // Image modal
+        function showImageModal(src) {
+            document.getElementById('modalImage').src = src;
+            document.getElementById('imageModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').classList.add('hidden');
+            document.body.style.overflow = 'visible';
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === "Escape") closeModal();
+        });
+
+        document.getElementById('imageModal').addEventListener('click', e => {
+            if (e.target === document.getElementById('imageModal')) closeModal();
+        });
+
+        // Init
+        window.onload = () => {
+            renderMenu();
+            document.getElementById('cat0').classList.add('active', 'border-b-4', 'border-amber-400', 'text-amber-400');
+        };
+    </script>
+</body>
+</html>
