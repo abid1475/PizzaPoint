@@ -266,18 +266,6 @@ img {
         <i class="fa-solid fa-chevron-down mt-1 text-lg sm:text-xl animate-bounce"></i>
     </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-    <!-- ABOUT US -->
     <section id="about" class="py-24 bg-white">
         <div class="max-w-6xl mx-auto px-6">
             <div class="grid md:grid-cols-12 gap-16 items-center">
@@ -336,17 +324,48 @@ img {
                 <h2 class="heading-font text-5xl font-bold mt-3">Our Menu</h2>
             </div>
 
-            <!-- Category Tabs -->
-            <div class="flex justify-center gap-2 mb-12 border-b border-zinc-700">
-                <button onclick="filterCategory(0)" id="cat0" 
-                        class="category-tab active px-8 py-4 font-semibold text-lg border-b-4 border-amber-400 text-amber-400">All</button>
-                <button onclick="filterCategory(1)" id="cat1" 
-                        class="category-tab px-8 py-4 font-semibold text-lg text-zinc-400 hover:text-white">Pizza</button>
-                <button onclick="filterCategory(2)" id="cat2" 
-                        class="category-tab px-8 py-4 font-semibold text-lg text-zinc-400 hover:text-white">Burgers</button>
-                <button onclick="filterCategory(3)" id="cat3" 
-                        class="category-tab px-8 py-4 font-semibold text-lg text-zinc-400 hover:text-white">Fast Food</button>
-            </div>
+
+            <div class="w-full overflow-x-auto mb-12 border-b border-zinc-700">
+  <div class="flex flex-nowrap sm:flex-wrap justify-start sm:justify-center gap-2 min-w-max px-2">
+    
+    <button onclick="filterCategory(0)" id="cat0"
+      class="category-tab active whitespace-nowrap px-4 sm:px-6 md:px-8 
+             py-3 sm:py-4 font-semibold text-sm sm:text-base md:text-lg 
+             border-b-4 border-amber-400 text-amber-400">
+      All
+    </button>
+
+    <button onclick="filterCategory(1)" id="cat1"
+      class="category-tab whitespace-nowrap px-4 sm:px-6 md:px-8 
+             py-3 sm:py-4 font-semibold text-sm sm:text-base md:text-lg 
+             text-zinc-400 hover:text-white">
+      Pizza
+    </button>
+
+    <button onclick="filterCategory(2)" id="cat2"
+      class="category-tab whitespace-nowrap px-4 sm:px-6 md:px-8 
+             py-3 sm:py-4 font-semibold text-sm sm:text-base md:text-lg 
+             text-zinc-400 hover:text-white">
+      Burgers
+    </button>
+
+    <button onclick="filterCategory(3)" id="cat3"
+      class="category-tab whitespace-nowrap px-4 sm:px-6 md:px-8 
+             py-3 sm:py-4 font-semibold text-sm sm:text-base md:text-lg 
+             text-zinc-400 hover:text-white">
+      Fast Food
+    </button>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
 
             <!-- Menu Grid -->
             <div id="menuGrid" class="grid md:grid-cols-3 gap-8">
